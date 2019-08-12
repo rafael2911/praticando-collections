@@ -60,9 +60,12 @@ public class GerenciadorDeTimes {
 	}
 	
 	public List<Long> buscarJogadoresDoTime(Long idTime){
-		Time time = findTimeById(idTime);
+		List<Long> jogadores = findTimeById(idTime).getJogadores().stream()
+				.map(Jogador::getId).collect(Collectors.toList());
 		
-		return time.getJogadores().stream().map(Jogador::getId).collect(Collectors.toList());
+		jogadores.sort(Long::compareTo);
+		
+		return jogadores;
 	}
 	
 	public Long buscarMelhorJogadorDoTime(Long idTime) {
