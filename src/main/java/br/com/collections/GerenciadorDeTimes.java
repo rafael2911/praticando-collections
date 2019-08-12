@@ -91,7 +91,7 @@ public class GerenciadorDeTimes {
 	
 	public BigDecimal buscarSalarioDoJogador(Long idJogador) {
 		
-		return null;
+		return findJogadorById(idJogador).getSalario();
 	}
 	
 	public List<Long> buscarTopJogadores(Integer top){

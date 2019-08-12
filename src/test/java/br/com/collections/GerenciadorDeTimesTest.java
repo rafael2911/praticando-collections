@@ -216,4 +216,24 @@ public class GerenciadorDeTimesTest {
 		assertEquals(7L, gerenciador.buscarJogadorMaiorSalario(1L).longValue());
 	}
 	
+	@Test(expected = TimeNaoEncontradoException.class)
+	public void testBuscarJogadorMaiorSalarioDoTimeIdInexistente() {
+		assertEquals(7L, gerenciador.buscarJogadorMaiorSalario(10L).longValue());
+	}
+	
+	@Test
+	public void testaBuscarSalarioDoJogador() {
+		gerenciador.incluirJogador(10L, 1L, "Jogador 2", LocalDate.of(1989, 7, 8), 75, new BigDecimal("4800.00"));
+		gerenciador.incluirJogador(5L, 1L, "Jogador 3", LocalDate.of(1974, 8, 27), 90, new BigDecimal("3000.00"));
+		gerenciador.incluirJogador(7L, 1L, "Jogador 4", LocalDate.of(1974, 8, 27), 63, new BigDecimal("4800.00"));
+		
+		assertEquals(new BigDecimal("3000.00"), gerenciador.buscarSalarioDoJogador(5L));
+	}
+	
+	@Test(expected = JogadorNaoEncontradoException.class)
+	public void testaBuscarSalarioDoJogadorIdInexistente() {
+		
+		assertEquals(new BigDecimal("3000.00"), gerenciador.buscarSalarioDoJogador(5L));
+	}
+	
 }
