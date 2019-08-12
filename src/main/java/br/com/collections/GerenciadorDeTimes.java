@@ -69,8 +69,8 @@ public class GerenciadorDeTimes {
 	}
 	
 	public Long buscarMelhorJogadorDoTime(Long idTime) {
-		
-		return null;
+		Time time = findTimeById(idTime);
+		return time.melhorJogadorDoTime();
 	}
 	
 	public Long buscarJogadorMaisVelho(Long idTime) {

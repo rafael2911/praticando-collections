@@ -132,4 +132,28 @@ public class GerenciadorDeTimesTest {
 		assertEquals(3, gerenciador.buscarJogadoresDoTime(2L).size());
 	}
 	
+	@Test
+	public void testaBuscarMelhorJogadorDotime() {
+		gerenciador.incluirJogador(10L, 1L, "Jogador 2", LocalDate.of(1989, 7, 8), 75, new BigDecimal("1800.00"));
+		gerenciador.incluirJogador(5L, 1L, "Jogador 3", LocalDate.of(1994, 6, 21), 90, new BigDecimal("3000.00"));
+		gerenciador.incluirJogador(7L, 1L, "Jogador 4", LocalDate.of(1990, 8, 27), 63, new BigDecimal("1300.00"));
+		
+		assertEquals(5L, gerenciador.buscarMelhorJogadorDoTime(1L).longValue());
+	}
+	
+	@Test
+	public void testaBuscarMelhorJogadorDotimeEmpatado() {
+		gerenciador.incluirJogador(7L, 1L, "Jogador 2", LocalDate.of(1989, 7, 8), 90, new BigDecimal("1800.00"));
+		gerenciador.incluirJogador(5L, 1L, "Jogador 3", LocalDate.of(1994, 6, 21), 90, new BigDecimal("3000.00"));
+		gerenciador.incluirJogador(3L, 1L, "Jogador 4", LocalDate.of(1990, 8, 27), 75, new BigDecimal("1300.00"));
+		
+		assertEquals(5L, gerenciador.buscarMelhorJogadorDoTime(1L).longValue());
+	}
+	
+	@Test(expected = TimeNaoEncontradoException.class)
+	public void testaBuscarMelhorJogadorIdInexistente() {
+		
+		assertEquals(5L, gerenciador.buscarMelhorJogadorDoTime(2L).longValue());
+	}
+	
 }

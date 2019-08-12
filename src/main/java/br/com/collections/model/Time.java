@@ -59,5 +59,16 @@ public class Time {
 	public void setCapitao(Jogador jogador) {
 		this.capitao = jogador;
 	}
+	
+	public Long melhorJogadorDoTime() {
+		return this.jogadores.stream().sorted((j1, j2) -> {
+			final int comparador = Integer.compare(j2.getNivelHabilidade(), j1.getNivelHabilidade());
+			if(comparador == 0)
+				return Long.compare(j1.getId(), j2.getId());
+			
+			return comparador;
+		}).findFirst().get().getId();
+		
+	}
 
 }
