@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import br.com.collections.exception.CapitaoNaoInformadoException;
 import br.com.collections.exception.IdentificadorUtilizadoException;
 import br.com.collections.exception.JogadorNaoEncontradoException;
 import br.com.collections.exception.TimeNaoEncontradoException;
@@ -40,8 +41,12 @@ public class GerenciadorDeTimes {
 	}
 	
 	public Long buscarCapitaoDoTime(Long idTime) {
+		Jogador capitao = findTimeById(idTime).getCapitao();
 		
-		return findTimeById(idTime).getCapitao().getId();
+		if(capitao == null)
+			throw new CapitaoNaoInformadoException();
+		
+		return capitao.getId();
 	}
 	
 	public String buscarNomeJogador(Long idJogador) {

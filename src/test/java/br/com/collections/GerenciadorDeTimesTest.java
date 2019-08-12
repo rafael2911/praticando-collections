@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.collections.exception.CapitaoNaoInformadoException;
 import br.com.collections.exception.IdentificadorUtilizadoException;
 import br.com.collections.exception.JogadorNaoEncontradoException;
 import br.com.collections.exception.TimeNaoEncontradoException;
@@ -72,6 +73,27 @@ public class GerenciadorDeTimesTest {
 	public void testaDefinirCapitaoJogadorInexistente() {
 		gerenciador.definirCapitao(2L);
 		
+	}
+	
+	@Test
+	public void testaBuscarCapitaoDoTime() {
+		gerenciador.incluirJogador(2L, 1L, "Jogador 2", LocalDate.of(1989, 7, 8), 75, new BigDecimal("1800.00"));
+		gerenciador.definirCapitao(2L);
+		
+		assertFalse(gerenciador.buscarCapitaoDoTime(1L).equals(1L));
+	}
+	
+	@Test(expected = TimeNaoEncontradoException.class)
+	public void testaBuscarCapitaoDeTimeInexistente() {
+		gerenciador.incluirJogador(2L, 1L, "Jogador 2", LocalDate.of(1989, 7, 8), 75, new BigDecimal("1800.00"));
+		gerenciador.definirCapitao(2L);
+		
+		assertFalse(gerenciador.buscarCapitaoDoTime(2L).equals(1L));
+	}
+	
+	@Test(expected = CapitaoNaoInformadoException.class)
+	public void testaBuscarCapitaoDeTimeSemCapitao() {
+		gerenciador.buscarCapitaoDoTime(1L);
 	}
 	
 }
