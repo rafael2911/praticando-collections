@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -177,6 +178,25 @@ public class GerenciadorDeTimesTest {
 	@Test(expected = TimeNaoEncontradoException.class)
 	public void testaBuscarJogadorMaisVelhoDotimeIdInexistente() {
 		assertEquals(7L, gerenciador.buscarJogadorMaisVelho(2L).longValue());
+	}
+	
+	@Test
+	public void testaBuscarTimes() {
+		gerenciador.incluirTime(6L, "Time 6", LocalDate.of(1985, 3, 18), "Verde", "Branco");
+		gerenciador.incluirTime(2L, "Time 2", LocalDate.of(1960, 9, 15), "Preto", "Branco");
+		
+		assertEquals(3, gerenciador.buscarTimes().size());
+		assertEquals(1L, gerenciador.buscarTimes().get(0).longValue());
+		assertEquals(2L, gerenciador.buscarTimes().get(1).longValue());
+		assertEquals(6L, gerenciador.buscarTimes().get(2).longValue());
+	}
+	
+	@Test
+	public void testaBuscarTimesComListaVazia() {
+		GerenciadorDeTimes gerenciador2 = new GerenciadorDeTimes();
+		
+		assertEquals(0, gerenciador2.buscarTimes().size());
+		assertEquals(true, gerenciador2.buscarTimes().isEmpty());
 	}
 	
 }

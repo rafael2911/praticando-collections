@@ -79,8 +79,9 @@ public class GerenciadorDeTimes {
 	}
 	
 	public List<Long> buscarTimes(){
-		
-		return new ArrayList<Long>(times.keySet());
+		ArrayList<Long> listaDeTimes = new ArrayList<Long>(times.keySet());
+		listaDeTimes.sort(Long::compareTo);
+		return listaDeTimes;
 	}
 	
 	public Long buscarJogadorMaiorSalario(Long idTime) {
