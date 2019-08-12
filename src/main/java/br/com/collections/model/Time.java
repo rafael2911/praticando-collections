@@ -81,4 +81,14 @@ public class Time {
 		}).findFirst().get().getId();
 	}
 
+	public Long jogadorMaiorSalario() {
+		return this.jogadores.stream().sorted((j1, j2) -> {
+			final int comparador = j2.getSalario().compareTo(j1.getSalario());
+			if(comparador == 0)
+				return Long.compare(j1.getId(), j2.getId());
+			
+			return comparador;
+		}).findFirst().get().getId();
+	}
+
 }

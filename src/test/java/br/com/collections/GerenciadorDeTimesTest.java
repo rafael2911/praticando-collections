@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -197,6 +196,24 @@ public class GerenciadorDeTimesTest {
 		
 		assertEquals(0, gerenciador2.buscarTimes().size());
 		assertEquals(true, gerenciador2.buscarTimes().isEmpty());
+	}
+	
+	@Test
+	public void testBuscarJogadorMaiorSalarioDoTime() {
+		gerenciador.incluirJogador(10L, 1L, "Jogador 2", LocalDate.of(1989, 7, 8), 75, new BigDecimal("1800.00"));
+		gerenciador.incluirJogador(5L, 1L, "Jogador 3", LocalDate.of(1974, 8, 27), 90, new BigDecimal("3000.00"));
+		gerenciador.incluirJogador(7L, 1L, "Jogador 4", LocalDate.of(1974, 8, 27), 63, new BigDecimal("1300.00"));
+		
+		assertEquals(5L, gerenciador.buscarJogadorMaiorSalario(1L).longValue());
+	}
+	
+	@Test
+	public void testBuscarJogadorMaiorSalarioDoTimeEmpatado() {
+		gerenciador.incluirJogador(10L, 1L, "Jogador 2", LocalDate.of(1989, 7, 8), 75, new BigDecimal("4800.00"));
+		gerenciador.incluirJogador(5L, 1L, "Jogador 3", LocalDate.of(1974, 8, 27), 90, new BigDecimal("3000.00"));
+		gerenciador.incluirJogador(7L, 1L, "Jogador 4", LocalDate.of(1974, 8, 27), 63, new BigDecimal("4800.00"));
+		
+		assertEquals(7L, gerenciador.buscarJogadorMaiorSalario(1L).longValue());
 	}
 	
 }

@@ -85,8 +85,8 @@ public class GerenciadorDeTimes {
 	}
 	
 	public Long buscarJogadorMaiorSalario(Long idTime) {
-		
-		return null;
+		Time time = findTimeById(idTime);
+		return time.jogadorMaiorSalario();
 	}
 	
 	public BigDecimal buscarSalarioDoJogador(Long idJogador) {
