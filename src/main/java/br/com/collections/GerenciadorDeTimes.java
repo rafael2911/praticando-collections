@@ -51,7 +51,7 @@ public class GerenciadorDeTimes {
 	
 	public String buscarNomeJogador(Long idJogador) {
 		
-		return null;
+		return findJogadorById(idJogador).getNome();
 	}
 	
 	public String buscarNomeTime(Long idTime) {
