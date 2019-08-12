@@ -71,4 +71,14 @@ public class Time {
 		
 	}
 
+	public Long jogadorMaisVelho() {
+		return this.jogadores.stream().sorted((j1, j2) -> {
+			final int comparador = j1.getDataNascimento().compareTo(j2.getDataNascimento());
+			if(comparador == 0)
+				return Long.compare(j1.getId(), j2.getId());
+			
+			return comparador;
+		}).findFirst().get().getId();
+	}
+
 }
