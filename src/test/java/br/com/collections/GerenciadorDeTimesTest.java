@@ -106,4 +106,14 @@ public class GerenciadorDeTimesTest {
 		assertEquals("Jogador 1", gerenciador.buscarNomeJogador(2L));
 	}
 	
+	@Test
+	public void testaBuscarNomeDotime() {
+		assertEquals("Time 1", gerenciador.buscarNomeTime(1L));
+	}
+	
+	@Test(expected = TimeNaoEncontradoException.class)
+	public void testaBuscarNomeDotimeIdInexistente() {
+		assertEquals("Time 1", gerenciador.buscarNomeTime(2L));
+	}
+	
 }

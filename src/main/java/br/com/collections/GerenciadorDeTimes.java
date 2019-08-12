@@ -56,7 +56,7 @@ public class GerenciadorDeTimes {
 	
 	public String buscarNomeTime(Long idTime) {
 		
-		return null;
+		return findTimeById(idTime).getNome();
 	}
 	
 	public List<Long> buscarJogadoresDoTime(Long idTime){
