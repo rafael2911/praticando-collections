@@ -108,8 +108,11 @@ public class GerenciadorDeTimes {
 	}
 	
 	public String buscarCorCamisaTimeDeFora(Long timeDaCasa, Long TimeDeFora) {
+		Time casa = findTimeById(timeDaCasa);
+		Time fora = findTimeById(TimeDeFora);
 		
-		return null;
+		return (casa.getCorUniformePrincipal().equals(fora.getCorUniformePrincipal())) ? 
+				fora.getCorUniformeSecundario() : fora.getCorUniformePrincipal();
 	}
 	
 	/*

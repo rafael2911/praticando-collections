@@ -282,4 +282,36 @@ public class GerenciadorDeTimesTest {
 		assertEquals(10L, gerenciador.buscarTopJogadores(10).get(3).longValue());
 	}
 	
+	@Test
+	public void testaBuscarCamisaTimeDeForaSecundario() {
+		gerenciador.incluirTime(10L, "Time 10", LocalDate.of(1970, 01, 12), "Azul", "Vermelho");
+		
+		assertEquals("Vermelho", gerenciador.buscarCorCamisaTimeDeFora(1L, 10L));
+	}
+	
+	@Test
+	public void testaBuscarCamisaTimeDeForaPrincipal() {
+		gerenciador.incluirTime(10L, "Time 10", LocalDate.of(1970, 01, 12), "Preto", "Branco");
+		
+		assertEquals("Preto", gerenciador.buscarCorCamisaTimeDeFora(1L, 10L));
+	}
+	
+	@Test(expected = TimeNaoEncontradoException.class)
+	public void testaBuscarCamisaTimeDeForaIdTimeForaInexistente() {
+		
+		assertEquals("Preto", gerenciador.buscarCorCamisaTimeDeFora(1L, 10L));
+	}
+	
+	@Test(expected = TimeNaoEncontradoException.class)
+	public void testaBuscarCamisaTimeDeForaIdTimeCasaInexistente() {
+		
+		assertEquals("Preto", gerenciador.buscarCorCamisaTimeDeFora(10L, 1L));
+	}
+	
+	@Test(expected = TimeNaoEncontradoException.class)
+	public void testaBuscarCamisaTimeDeForaIdDoisTimesInexistentes() {
+		
+		assertEquals("Preto", gerenciador.buscarCorCamisaTimeDeFora(10L, 5L));
+	}
+	
 }
