@@ -96,7 +96,15 @@ public class GerenciadorDeTimes {
 	
 	public List<Long> buscarTopJogadores(Integer top){
 		
-		return null;
+		return this.jogadores.values().stream().sorted((j1, j2) -> {
+			final int comparador = Integer.compare(j2.getNivelHabilidade(), j1.getNivelHabilidade());
+			if(comparador == 0)
+				return Long.compare(j1.getId(), j2.getId());
+			
+			return comparador;
+		}).limit(top)
+				.map(Jogador::getId).collect(Collectors.toList());
+		
 	}
 	
 	public String buscarCorCamisaTimeDeFora(Long timeDaCasa, Long TimeDeFora) {

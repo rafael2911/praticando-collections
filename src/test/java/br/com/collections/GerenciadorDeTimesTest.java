@@ -236,4 +236,50 @@ public class GerenciadorDeTimesTest {
 		assertEquals(new BigDecimal("3000.00"), gerenciador.buscarSalarioDoJogador(5L));
 	}
 	
+	@Test
+	public void testaBuscarTopJogadores() {
+		gerenciador.incluirTime(10L, "Time 10", LocalDate.of(1970, 01, 12), "Amarelo", "Azul");
+		gerenciador.incluirTime(5L, "Time 5", LocalDate.of(1985, 5, 25), "Verde", "Branco");
+		
+		gerenciador.incluirJogador(10L, 1L, "Jogador 10", LocalDate.of(1989, 7, 8), 75, new BigDecimal("4800.00"));
+		gerenciador.incluirJogador(5L, 1L, "Jogador 5", LocalDate.of(1974, 8, 27), 90, new BigDecimal("3000.00"));
+		gerenciador.incluirJogador(7L, 1L, "Jogador 7", LocalDate.of(1974, 8, 27), 63, new BigDecimal("4800.00"));
+		
+		gerenciador.incluirJogador(2L, 5L, "Jogador 2", LocalDate.of(1980, 5, 21), 80, new BigDecimal("3200.00"));
+		gerenciador.incluirJogador(6L, 5L, "Jogador 6", LocalDate.of(1974, 10, 17), 99, new BigDecimal("5000.00"));
+		gerenciador.incluirJogador(11L, 5L, "Jogador 11", LocalDate.of(1975, 12, 02), 90, new BigDecimal("4300.00"));
+		
+		gerenciador.incluirJogador(3L, 10L, "Jogador 3", LocalDate.of(1989, 7, 8), 55, new BigDecimal("1200.00"));
+		gerenciador.incluirJogador(4L, 10L, "Jogador 4", LocalDate.of(1983, 9, 30), 99, new BigDecimal("7000.00"));
+		gerenciador.incluirJogador(8L, 10L, "Jogador 8", LocalDate.of(1990, 2, 15), 89, new BigDecimal("5300.00"));
+		
+		assertEquals(3, gerenciador.buscarTopJogadores(3).size());
+		assertEquals(4L, gerenciador.buscarTopJogadores(3).get(0).longValue());
+		assertEquals(6L, gerenciador.buscarTopJogadores(3).get(1).longValue());
+		assertEquals(5L, gerenciador.buscarTopJogadores(3).get(2).longValue());
+	}
+	
+	@Test
+	public void testaBuscarTopJogadoresListaVazia() {
+		GerenciadorDeTimes gerenciador2 = new GerenciadorDeTimes();
+		
+		assertEquals(0, gerenciador2.buscarTopJogadores(3).size());
+	}
+	
+	@Test
+	public void testaBuscarTopJogadoresTopMaiorQueLista() {
+		gerenciador.incluirTime(10L, "Time 10", LocalDate.of(1970, 01, 12), "Amarelo", "Azul");
+		
+		gerenciador.incluirJogador(10L, 10L, "Jogador 10", LocalDate.of(1989, 7, 8), 75, new BigDecimal("4800.00"));
+		gerenciador.incluirJogador(5L, 10L, "Jogador 5", LocalDate.of(1974, 8, 27), 90, new BigDecimal("3000.00"));
+		gerenciador.incluirJogador(7L, 1L, "Jogador 7", LocalDate.of(1974, 8, 27), 80, new BigDecimal("4800.00"));
+		
+		
+		assertEquals(4, gerenciador.buscarTopJogadores(10).size());
+		assertEquals(5L, gerenciador.buscarTopJogadores(10).get(0).longValue());
+		assertEquals(1L, gerenciador.buscarTopJogadores(10).get(1).longValue());
+		assertEquals(7L, gerenciador.buscarTopJogadores(10).get(2).longValue());
+		assertEquals(10L, gerenciador.buscarTopJogadores(10).get(3).longValue());
+	}
+	
 }
